@@ -10,6 +10,7 @@ var jade = require('gulp-jade');
 var livereload = require('gulp-livereload');
 var replace = require('gulp-replace');
 var stylus = require('gulp-stylus');
+var uglify = require('gulp-uglify');
 var css = require('gulp-minify-css');
 var ngAnnotate = require('gulp-ng-annotate');
 var htmlmin = require('gulp-htmlmin');
@@ -26,7 +27,7 @@ gulp.task('compileStyles', function(){
   gulp.src('./src/css/**/*.styl')
     .pipe(stylus())
  	  .pipe(css())
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest('./public'))
     .pipe(livereload())
 });
 
