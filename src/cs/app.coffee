@@ -1,4 +1,4 @@
-angular.module 'phone-book', ['ui.router']
+angular.module 'phone-book', ['ui.router', 'ngStorage']
 
 angular.module('phone-book').config ['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) ->
   $stateProvider
