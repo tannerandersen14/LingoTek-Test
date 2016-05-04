@@ -4,7 +4,7 @@ var express = require('express'),
   connect = require('connect'),
   app = express();
 
-
+app.use(express.static(__dirname + './../public'));
 
 
 app.listen(5050, function() {

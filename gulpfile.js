@@ -15,13 +15,12 @@ var css = require('gulp-minify-css');
 var ngAnnotate = require('gulp-ng-annotate');
 var htmlmin = require('gulp-htmlmin');
 
-var watcher = gulp.task('watch', function() {
+gulp.task('watch', function() {
+  livereload({ start: true })
   livereload.listen();
   gulp.watch(['./src/cs/**/*.coffee', './src/css/**/*.styl', './src/views/**/*.jade', './src/*.jade'], ['default'])
 });
-watcher.on('change', function( event ) {
-        console.log('File ' + event.path + ' was ' + event.type + ' at ' + new Date() + ' , running tasks...');
-});
+
 
 gulp.task('compileStyles', function(){
   gulp.src('./src/css/**/*.styl')
@@ -57,4 +56,4 @@ gulp.task('index', function() {
     .pipe(livereload())
 });
 
-gulp.task('default', ['compileStyles', 'coffee', 'jade', 'index']);
+gulp.task('default', ['coffee', 'compileStyles', 'jade', 'index']);

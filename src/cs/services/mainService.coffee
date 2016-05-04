@@ -1,3 +1,3 @@
-angular.module('phone-book') 'mainService', ['$http', ($http) ->
+angular.module('phone-book').service 'mainService', ['$http', ($http) ->
 
 ]
