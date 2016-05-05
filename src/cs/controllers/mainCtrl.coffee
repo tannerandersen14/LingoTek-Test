@@ -1,5 +1,14 @@
 angular.module('phone-book').controller 'mainCtrl', ['$scope', '$localStorage', ($scope, $localStorage) ->
-  $scope.data = 'This is data here yes?'
-  $localStorage.hello = 'Hello there this is from local storage'
-  $scope.localStorageData = $localStorage.hello
+  $scope.newContact = {}
+  $scope.contactArray = $localStorage.contactArray
+  if !$localStorage.contactArray
+    $localStorage.contactArray = []
+  console.log($localStorage.contactArray)
+  $scope.addContact = ->
+    if $localStorage.contactArray.includes $scope.newContact
+      console.log 'Contact already exists.'
+      $scope.newContact = {}
+      return
+    $scope.newContact = {}
+    console.log $localStorage.contactArray
 ]

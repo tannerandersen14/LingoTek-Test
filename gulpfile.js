@@ -14,20 +14,34 @@ var uglify = require('gulp-uglify');
 var css = require('gulp-minify-css');
 var ngAnnotate = require('gulp-ng-annotate');
 var htmlmin = require('gulp-htmlmin');
+var nodemon = require('gulp-nodemon');
+var notify = require('gulp-notify');
+var lr = require('tiny-lr');
+var server = lr()
 
 gulp.task('watch', function() {
-  livereload({ start: true })
-  livereload.listen();
-  gulp.watch(['./src/cs/**/*.coffee', './src/css/**/*.styl', './src/views/**/*.jade', './src/*.jade'], ['default'])
+  livereload({ start: true, auto: false })
+  server.listen(5052, function(err) {
+    if (err) {
+      return console.log(err);
+    }
+    gulp.watch(['./src/cs/**/*.coffee', './src/css/**/*.styl', './src/views/**/*.jade', './src/*.jade'], ['coffee', 'compileStyles', 'jade', 'index', 'watch'])
+  });
 });
 
+gulp.task('nodemon', function() {
+  livereload({ start: true, auto: false })
+  nodemon({
+    script: './server.js'
+  })
+})
 
 gulp.task('compileStyles', function(){
   gulp.src('./src/css/**/*.styl')
     .pipe(stylus())
  	  .pipe(css())
     .pipe(gulp.dest('./public'))
-    .pipe(livereload())
+    .pipe(livereload(server))
 });
 
 gulp.task('coffee', function() {
@@ -37,7 +51,7 @@ gulp.task('coffee', function() {
     .pipe(uglify())
     .pipe(concat('all.min.js'))
     .pipe(gulp.dest('./public/'))
-    .pipe(livereload())
+    .pipe(livereload(server))
 });
 
 gulp.task('jade', function() {
@@ -45,7 +59,7 @@ gulp.task('jade', function() {
     .pipe(jade())
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('./public'))
-    .pipe(livereload())
+    .pipe(livereload(server))
 });
 
 gulp.task('index', function() {
@@ -53,7 +67,7 @@ gulp.task('index', function() {
     .pipe(jade())
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('./public'))
-    .pipe(livereload())
+    .pipe(livereload(server))
 });
 
-gulp.task('default', ['coffee', 'compileStyles', 'jade', 'index']);
+gulp.task('default', ['coffee', 'compileStyles', 'jade', 'index', 'watch', 'nodemon']);
