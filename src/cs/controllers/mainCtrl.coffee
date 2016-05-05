@@ -11,4 +11,10 @@ angular.module('phone-book').controller 'mainCtrl', ['$scope', '$localStorage', 
       return
     $scope.newContact = {}
     console.log $localStorage.contactArray
+  $scope.deleteContact = (contact) ->
+    i = 0
+    while i < $localStorage.contactArray.length
+      if contact == $localStorage.contactArray[i]
+        $localStorage.contactArray.splice i, 1
+      i++
 ]

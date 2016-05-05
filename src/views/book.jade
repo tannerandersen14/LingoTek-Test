@@ -3,7 +3,7 @@ div(class="container")
   div
     p This is the contact book
     p It's pretty great
-    p Is the luh?
+    p Is the luh? This work plz
     p {{data}}
     p {{localStorageData}}
   form(ng-submit="addContact()")
@@ -15,5 +15,6 @@ div(class="container")
   div(ng-repeat="contact in contactArray")
     h3 {{contact.firstName}} {{contact.lastName}}
     p {{contact.phoneNumber}} {{contact.email}}
+    button(type="submit" class="btn btn-danger" ng-click="deleteContact(contact)") Delete Contact
     
   
