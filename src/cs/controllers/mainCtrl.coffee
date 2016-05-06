@@ -1,6 +1,4 @@
 angular.module('phone-book').controller 'mainCtrl', ['$scope', '$localStorage', ($scope, $localStorage) ->
-  $scope.test = '123 344 9302'
-  console.log $scope.test.replace(/\s/g, '')
   if !$localStorage.contactArray
     $localStorage.contactArray = []
   $scope.contactArray = $localStorage.contactArray
@@ -32,6 +30,9 @@ angular.module('phone-book').controller 'mainCtrl', ['$scope', '$localStorage', 
       if contact == $localStorage.contactArray[i]
         $localStorage.contactArray.splice i, 1
       i++
+  $scope.deleteAllContacts = ->
+    $localStorage.contactArray = []
+    $scope.contactArray = $localStorage.contactArray
   $scope.populateEdit = (contact) ->
     $scope.editViewContact = contact
   $scope.editContact = (originalContact, editedContact) ->
