@@ -37,56 +37,75 @@ div(class="container")
           div(class="modal-footer")
             button(type="button" class="btn btn-default" data-dismiss="modal") Close
   div(class="contact-container")
-    div(ng-repeat="contact in contactArray" class="contact")
-      h2 {{contact.firstName}} {{contact.lastName}}
-      button(type="button" class="btn btn-default btn-lg buttons" data-toggle="modal" data-target="#viewModal" ng-click="populateView(contact)") View Contact
-      div(id="viewModal" class="modal fade" role="dialog")
-        div(class="modal-dialog")
-          div(class="modal-content")
-            div(class="modal-header")
-              button(type="button" class="close" data-dismiss="modal") &times;
-              h4(class="modal-title") View Contact
-            div(class="modal-body")
-              h2 {{viewContact.firstName}} {{viewContact.lastName}}
-              h3 Phone Number: {{viewContact.phoneNumber}}
-              h3 Email: {{viewContact.email}}
-            div(class="modal-footer")
-              button(type="button" class="btn btn-default" data-dismiss="modal") Close
-      br
-      button(type="button" class="btn btn-info btn-lg buttons" data-toggle="modal" data-target="#editModal" ng-click="populateEdit(contact)") Edit Contact
-      div(id="editModal" class="modal fade" role="dialog")
-        div(class="modal-dialog")
-          div(class="modal-content")
-            div(class="modal-header")
-              button(type="button" class="close" data-dismiss="modal") &times;
-              h4(class="modal-title") Edit Contact
-            div(class="modal-body")
-              form(ng-submit="editContact(editViewContact, newEditContact)")
-                h4 {{editViewContact.firstName}}
-                input(type="text" class="form-control" placeholder="New First Name" ng-model="newEditContact.firstName")
-                h4 {{editViewContact.lastName}}
-                input(type="text" class="form-control" placeholder="New Last Name" ng-model="newEditContact.lastName")
-                h4 {{editViewContact.phoneNumber}}
-                input(type="text" class="form-control" placeholder="New Phone Number e.g: (123-456-7890)" ng-model="newEditContact.phoneNumber")
-                h4 {{editViewContact.email}}
-                input(type="email" class="form-control" placeholder="New Email" ng-model="newEditContact.email")
-                br
-                button(type="submit" class="btn btn-success modal-buttons") Confirm Edit
-            div(class="modal-footer")
-              button(type="button" class="btn btn-default" data-dismiss="modal") Close
-      button(type="button" class="btn btn-danger btn-lg buttons" data-toggle="modal" data-target="#deleteModal") Delete Contact
-      div(id="deleteModal" class="modal fade" role="dialog")
-        div(class="modal-dialog")
-          div(class="modal-content")
-            div(class="modal-header")
-              button(type="button" class="close" data-dismiss="modal") &times;
-              h4(class="modal-title text-center") Delete Contact
-            div(class="modal-body")
-              h2(class="text-center") Delete contact?
-              div(class="button-container")
-                button(type="button" class="btn btn-default buttons" data-dismiss="modal") Cancel
-                button(type="button" class="btn btn-danger buttons" ng-click="deleteContact(contact)" data-dismiss="modal") Confirm
-              div(class="modal-footer")
-                button(type="button" class="btn btn-default" data-dismiss="modal") Close
-    
+    table(class="table table-bordered")
+      th
+        a(ng-click="orderByField='firstName'; reverseSort = !reverseSort" class="text-center") 
+          h3 First Name
+      th
+        a(ng-click="orderByField='lastName'; reverseSort = !reverseSort" class="text-center") 
+          h3 Last Name
+      th
+        h3(class="text-center") View
+      th
+        h3(class="text-center") Edit
+      th
+        h3(class="text-center") Delete
+      tbody(ng-repeat="contact in contactArray | orderBy:orderByField:reverseSort")
+        tr
+          td(align="left" width="20%")
+            h2(class="text-center") {{contact.firstName}}
+          td(align="center" width="20%")
+            h2(class="text-center") {{contact.lastName}}
+          td(align="center" width="20%")
+            button(type="button" class="btn btn-default btn-lg buttons" data-toggle="modal" data-target="#viewModal" ng-click="populateView(contact)") View Contact
+            div(id="viewModal" class="modal fade" role="dialog")
+              div(class="modal-dialog")
+                div(class="modal-content")
+                  div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal") &times;
+                    h4(class="modal-title") View Contact
+                  div(class="modal-body")
+                    h2 {{viewContact.firstName}} {{viewContact.lastName}}
+                    h3 Phone Number: {{viewContact.phoneNumber}}
+                    h3 Email: {{viewContact.email}}
+                  div(class="modal-footer")
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Close
+          td(align="center" width="20")
+            button(type="button" class="btn btn-info btn-lg buttons" data-toggle="modal" data-target="#editModal" ng-click="populateEdit(contact)") Edit Contact
+            div(id="editModal" class="modal fade" role="dialog")
+              div(class="modal-dialog")
+                div(class="modal-content")
+                  div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal") &times;
+                    h4(class="modal-title") Edit Contact
+                  div(class="modal-body")
+                    form(ng-submit="editContact(editViewContact, newEditContact)")
+                      h4 {{editViewContact.firstName}}
+                      input(type="text" class="form-control" placeholder="New First Name" ng-model="newEditContact.firstName")
+                      h4 {{editViewContact.lastName}}
+                      input(type="text" class="form-control" placeholder="New Last Name" ng-model="newEditContact.lastName")
+                      h4 {{editViewContact.phoneNumber}}
+                      input(type="text" class="form-control" placeholder="New Phone Number e.g: (123-456-7890)" ng-model="newEditContact.phoneNumber")
+                      h4 {{editViewContact.email}}
+                      input(type="email" class="form-control" placeholder="New Email" ng-model="newEditContact.email")
+                      br
+                      button(type="submit" class="btn btn-success modal-buttons") Confirm Edit
+                  div(class="modal-footer")
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Close
+          td(align="center" width="20%")
+            button(type="button" class="btn btn-danger btn-lg buttons" data-toggle="modal" data-target="#deleteModal") Delete Contact
+            div(id="deleteModal" class="modal fade" role="dialog")
+              div(class="modal-dialog")
+                div(class="modal-content")
+                  div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal") &times;
+                    h4(class="modal-title text-center") Delete Contact
+                  div(class="modal-body")
+                    h2(class="text-center") Delete contact?
+                    div(class="button-container")
+                      button(type="button" class="btn btn-default buttons" data-dismiss="modal") Cancel
+                      button(type="button" class="btn btn-danger buttons" ng-click="deleteContact(contact)" data-dismiss="modal") Confirm
+                    div(class="modal-footer")
+                      button(type="button" class="btn btn-default" data-dismiss="modal") Close
+      
   

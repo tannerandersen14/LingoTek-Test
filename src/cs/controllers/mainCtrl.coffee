@@ -2,6 +2,8 @@ angular.module('phone-book').controller 'mainCtrl', ['$scope', '$localStorage', 
   if !$localStorage.contactArray
     $localStorage.contactArray = []
   $scope.contactArray = $localStorage.contactArray
+  $scope.orderByField = ''
+  $scope.reverseSort = false
   $scope.addContact = ->
     if $localStorage.contactArray.includes $scope.newContact
       alert 'Contact already exists.'
