@@ -1,0 +1,17 @@
+{
+  "name": "lingotek-test",
+  "description": "LingoTek Test",
+  "main": "src/js/app.js",
+  "authors": [
+    "Tanner Andersen <tanner.andersen14@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/tannerandersen14/LingoTek-Test",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "jquery": "^2.2.3",
+    "ngstorage": "^0.3.10",
+    "bootstrap": "^3.3.6"
+  }
+}
