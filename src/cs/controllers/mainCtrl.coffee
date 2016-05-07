@@ -2,10 +2,9 @@ angular.module('phone-book').controller 'mainCtrl', ['$scope', '$localStorage', 
   if !$localStorage.contactArray
     $localStorage.contactArray = []
   $scope.contactArray = $localStorage.contactArray
-  console.log($localStorage.contactArray)
   $scope.addContact = ->
     if $localStorage.contactArray.includes $scope.newContact
-      console.log 'Contact already exists.'
+      alert 'Contact already exists.'
       $scope.newContact = {}
       return
     $scope.newContact.firstName.charAt(0).toUpperCase()
@@ -71,6 +70,4 @@ angular.module('phone-book').controller 'mainCtrl', ['$scope', '$localStorage', 
   $scope.populateView = (contact) ->
     $scope.contactArray = $localStorage.contactArray
     $scope.viewContact = contact
-  $scope.logStorage = ->
-    console.log $localStorage.contactArray
 ]
